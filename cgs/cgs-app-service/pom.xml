@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.uaepay.gateway.cgs</groupId>
+        <artifactId>cgs-parent</artifactId>
+        <version>1.2.6-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cgs-app-service</artifactId>
+
+    <properties>
+        <maven.install.skip>true</maven.install.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.uaepay.gateway.cgs</groupId>
+            <artifactId>cgs-app-template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.cms</groupId>
+            <artifactId>cms-service-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.member</groupId>
+            <artifactId>member-facade</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.uaepay.cmsii</groupId>
+            <artifactId>cmsii-service-facade</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.uaepay.public.pts</groupId>
+            <artifactId>pts-app-facade</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.uaepay.kyc</groupId>
+            <artifactId>kyc-service-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+    </dependencies>
+
+</project>

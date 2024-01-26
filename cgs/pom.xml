@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.uaepay</groupId>
+        <artifactId>uaepay-root</artifactId>
+        <version>1.2.1</version>
+    </parent>
+
+    <groupId>com.uaepay.gateway.cgs</groupId>
+    <artifactId>cgs-parent</artifactId>
+    <version>1.2.6-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>cgs-web</module>
+        <module>cgs-app-facade</module>
+        <module>cgs-app-template</module>
+        <module>cgs-app-service</module>
+        <module>cgs-app-template-testtool</module>
+    </modules>
+
+    <properties>
+
+        <maven.test.skip>false</maven.test.skip>
+
+        <!-- pom -->
+        <uaepay-spring-dependenciesa.version>1.2.14-SNAPSHOT</uaepay-spring-dependenciesa.version>
+
+        <!-- 公共 -->
+        <commons.io.version>2.6</commons.io.version>
+        <velocity.version>1.7</velocity.version>
+        <velocity.tools.version>2.0</velocity.tools.version>
+
+        <!-- 内部公共 -->
+        <gateway-common.version>1.2.1-SNAPSHOT</gateway-common.version>
+
+        <!-- 内部 -->
+        <acs.version>1.1.9-SNAPSHOT</acs.version>
+        <voucher.version>1.1.1</voucher.version>
+        <pts.version>1.2.1-SNAPSHOT</pts.version>
+        <ues.version>2.3.0</ues.version>
+        <member.version>1.0.28-SNAPSHOT</member.version>
+        <cps.version>1.2.0-SNAPSHOT</cps.version>
+        <cmsii.version>1.0.5-SNAPSHOT</cmsii.version>
+        <cms.version>1.0.2-SNAPSHOT</cms.version>
+        <trace.version>6.5.0</trace.version>
+        <ufs2-client.version>1.0.3-SNAPSHOT</ufs2-client.version>
+        <beacon.version>1.2.11-SNAPSHOT</beacon.version>
+        <personal.version>1.1.1-SNAPSHOT</personal.version>
+
+        <grc.component.version>1.0.14-SNAPSHOT</grc.component.version>
+        <grc.common.version>1.0.5-SNAPSHOT</grc.common.version>
+
+        <kyc.service.api.version>1.0.0-SNAPSHOT</kyc.service.api.version>
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- self -->
+            <dependency>
+                <groupId>com.uaepay.gateway.cgs</groupId>
+                <artifactId>cgs-app-facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.gateway.cgs</groupId>
+                <artifactId>cgs-app-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.gateway.cgs</groupId>
+                <artifactId>cgs-app-template</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.gateway.cgs</groupId>
+                <artifactId>cgs-app-template-testtool</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- pom -->
+            <dependency>
+                <groupId>com.uaepay</groupId>
+                <artifactId>uaepay-spring-dependencies</artifactId>
+                <version>${uaepay-spring-dependenciesa.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 内部公共 -->
+            <dependency>
+                <groupId>com.uaepay.gateway.common</groupId>
+                <artifactId>common-app-facade</artifactId>
+                <version>${gateway-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.gateway.common</groupId>
+                <artifactId>common-app-template</artifactId>
+                <version>${gateway-common.version}</version>
+            </dependency>
+
+            <!-- 公共 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-tools</artifactId>
+                <version>${velocity.tools.version}</version>
+            </dependency>
+
+            <!-- 内部 -->
+            <dependency>
+                <groupId>com.uaepay.member.acs</groupId>
+                <artifactId>acs-service-facade</artifactId>
+                <version>${acs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.basis.ues</groupId>
+                <artifactId>ues-client</artifactId>
+                <version>${ues.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.public.pts</groupId>
+                <artifactId>pts-app-facade</artifactId>
+                <version>${pts.version}</version>
+            </dependency>
+            <dependency>
+			   <groupId>com.uaepay.rm</groupId>
+			   <artifactId>cps-stub</artifactId>
+			   <version>${cps.version}</version>
+			</dependency>
+
+            <dependency>
+                <groupId>com.uaepay.cmsii</groupId>
+                <artifactId>cmsii-service-facade</artifactId>
+                <version>${cmsii.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.cms</groupId>
+                <artifactId>cms-service-facade</artifactId>
+                <version>${cms.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.uaepay.member</groupId>
+                <artifactId>member-facade</artifactId>
+                <version>${member.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.uaepay.voucher</groupId>
+                <artifactId>voucher-facade</artifactId>
+                <version>${voucher.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>org.apache.skywalking</groupId>
+				<artifactId>apm-toolkit-trace</artifactId>
+				<version>${trace.version}</version>
+       		 </dependency>
+            <dependency>
+                <groupId>com.uaepay.basis.ufs2</groupId>
+                <artifactId>ufs2-client-proxy</artifactId>
+                <version>${ufs2-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.uaepay.basis.beacon</groupId>
+                <artifactId>beacon-common</artifactId>
+                <version>${beacon.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.uaepay.basis.beacon</groupId>
+                <artifactId>beacon-service-facade</artifactId>
+                <version>${beacon.version}</version>
+            </dependency>
+            <!-- 测试 -->
+            <dependency>
+                <groupId>com.uaepay.member.acs</groupId>
+                <artifactId>acs-service-manager</artifactId>
+                <version>${acs.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.uaepay.application.personal</groupId>
+                <artifactId>personal-service-facade</artifactId>
+                <version>${personal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.uaepay.grc</groupId>
+                <artifactId>grc-component-connect-api</artifactId>
+                <version>${grc.component.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.grc</groupId>
+                <artifactId>grc-common</artifactId>
+                <version>${grc.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.uaepay.kyc</groupId>
+                <artifactId>kyc-service-api</artifactId>
+                <version>${kyc.service.api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- try:
+            mvn versions:set -DnewVersion=1.2.5-SNAPSHOT
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+
+            <!-- try:
+            mvn deploy -Dmaven.test.skip
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

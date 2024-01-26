@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.uaepay.gateway.cgs</groupId>
+        <artifactId>cgs-parent</artifactId>
+        <version>1.2.6-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cgs-web</artifactId>
+
+    <properties>
+        <maven.install.skip>true</maven.install.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <dependencies>
+        <!-- self -->
+        <dependency>
+            <groupId>com.uaepay.gateway.cgs</groupId>
+            <artifactId>cgs-app-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.gateway.cgs</groupId>
+            <artifactId>cgs-app-service</artifactId>
+        </dependency>
+
+        <!-- inf -->
+        <dependency>
+            <groupId>com.uaepay.starter</groupId>
+            <artifactId>monitor-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.starter</groupId>
+            <artifactId>dubbo-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.starter</groupId>
+            <artifactId>redis-starter</artifactId>
+        </dependency>
+
+
+
+        <!-- 公共 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+
+        <!-- inner -->
+        <dependency>
+            <groupId>com.uaepay.member.acs</groupId>
+            <artifactId>acs-service-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.basis.ues</groupId>
+            <artifactId>ues-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.voucher</groupId>
+            <artifactId>voucher-facade</artifactId>
+        </dependency>
+        <!--cps  -->
+		<dependency>
+		   <groupId>com.uaepay.rm</groupId>
+		   <artifactId>cps-stub</artifactId>
+		</dependency>
+        <!-- ufs -->
+        <dependency>
+            <groupId>com.uaepay.basis.ufs2</groupId>
+            <artifactId>ufs2-client-proxy</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.member.acs</groupId>
+            <artifactId>acs-service-manager</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.member</groupId>
+            <artifactId>member-facade</artifactId>
+        </dependency>
+        <!-- 内部公共 -->
+        <dependency>
+            <groupId>com.uaepay.basis.beacon</groupId>
+            <artifactId>beacon-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.uaepay.basis.beacon</groupId>
+            <artifactId>beacon-service-facade</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.grc</groupId>
+            <artifactId>grc-component-connect-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.grc</groupId>
+            <artifactId>grc-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.uaepay.application.personal</groupId>
+            <artifactId>personal-service-facade</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.uaepay.gateway.sgs</groupId>
+                    <artifactId>sgs-app-template</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.uaepay.gateway.cgs</groupId>
+                    <artifactId>cgs-app-template</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.uaepay.gateway.cgs</groupId>
+                    <artifactId>cgs-app-template</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
