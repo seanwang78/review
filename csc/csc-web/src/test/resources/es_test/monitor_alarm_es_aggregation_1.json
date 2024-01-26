@@ -1,0 +1,78 @@
+{
+  "index": "i_dev_csc_test_data",
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "match": {
+            "dataSet": "ut_ma_status"
+          }
+        },
+        {
+          "match": {
+            "status": "E"
+          }
+        },
+        {
+          "range": {
+            "updateTime": {
+              "gte": {begin},
+              "lt": {end}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_source": [
+    "orderNo",
+    "status",
+    "amount",
+    "updateTime"
+  ],
+  "sort": {
+    "updateTime": "asc"
+  },
+  "aggs": {
+    "group1": {
+      "terms": {
+        "field": "group1.keyword",
+        "size": 3
+      },
+      "aggregations": {
+        "group2": {
+          "terms": {
+            "field": "group2.keyword",
+            "size": 3
+          },
+          "aggs": {
+            "group3": {
+              "terms": {
+                "field": "group3.keyword",
+                "size": 10
+              },
+              "aggs": {
+                "max": {
+                  "max": {
+                    "field": "amount"
+                  }
+                },
+                "min": {
+                  "min": {
+                    "field": "amount"
+                  }
+                },
+                "maxDate": {
+                  "max": {
+                    "field": "updateTime"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

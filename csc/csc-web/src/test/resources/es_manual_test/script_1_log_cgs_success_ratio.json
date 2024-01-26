@@ -1,0 +1,78 @@
+{
+  "index": "porter_cgs*",
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "range": {
+            "requestTime": {
+              "gte": {begin},
+              "lt": {end}
+            }
+          }
+        },
+        {
+          "bool": {
+            "must_not": [
+              {
+                "terms": {
+                  "returnCode.keyword": ["401", "403"]
+                }
+              },
+              {
+                "terms": {
+                  "apiCode.keyword": ["xxx"]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "size": 0,
+  "aggs": {
+    "api_code": {
+      "terms": {
+        "field": "apiCode.keyword",
+        "size": 10000
+      },
+      "aggs": {
+        "success": {
+          "filter": {
+            "term": {
+              "returnCode.keyword": "200"
+            }
+          }
+        },
+        "success_ratio": {
+          "bucket_script": {
+            "buckets_path": {
+              "success_total": "success._count",
+              "total": "_count"
+            },
+            "script": "params.success_total / params.total",
+            "format": "0.00%"
+          }
+        },
+        "success_ratio_filter": {
+          "bucket_selector": {
+            "buckets_path": {
+              "success_ratio": "success_ratio.value",
+              "total": "_count"
+            },
+            "script": "params.total >= 50 && params.success_ratio < 1.00"
+          }
+        },
+        "success_ratio_sort": {
+          "bucket_sort": {
+            "sort": [
+              { "success_ratio": { "order": "asc" } }
+            ],
+            "size": 10
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "index": "i_dev_csc_test_data",
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "match": {
+            "dataSet": "ut_ma_status"
+          }
+        },
+        {
+          "match": {
+            "status": "E"
+          }
+        },
+        {
+          "range": {
+            "updateTime": {
+              "gte": {begin},
+              "lt": {end}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_source": [
+    "orderNo",
+    "status",
+    "amount",
+    "updateTime"
+  ],
+  "sort": {
+    "updateTime": "asc"
+  },
+  "aggs": {
+  }
+}
+

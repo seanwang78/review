@@ -1,0 +1,51 @@
+{
+  "index": "i_dev_csc_test_data",
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "match": {
+            "dataSet": "ut_ma_status"
+          }
+        },
+        {
+          "range": {
+            "updateTime": {
+              "gte": {begin},
+              "lt": {end}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "status": {
+      "terms": {
+        "field": "status.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "group1": {
+          "terms": {
+            "field": "group1.keyword",
+            "size": 10
+          },
+          "aggs": {
+            "maxAmount": {
+              "max": {
+                "field": "amount"
+              }
+            },
+            "maxDate": {
+              "max": {
+                "field": "updateTime"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

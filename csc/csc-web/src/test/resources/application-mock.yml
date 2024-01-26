@@ -1,0 +1,4 @@
+dubbo.reference.com.uaepay.mns.service.facade.MsgNotifyFacade.injvm: true
+
+log_monitor:
+  cgsPorterIndexPrefix: porter_cgs_unittest-

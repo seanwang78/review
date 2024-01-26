@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--
+    Mapper文件自动生成方式：
+    1. 修改 generatorConfig.properties
+    2. 增加table配置，参考：t_gateway_api_config
+    3. 在目录下执行命令：mvn mybatis-generator:generate -e
+    -->
+    <properties resource="META-INF/mybatis-generator/generatorConfig.properties"/>
+    <context id="tutorial" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <commentGenerator type="com.uaepay.mybatis.generator.plugin.SimpleCommentGenerator">
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${jdbcConnection.connectionURL}"
+                        userId="${jdbcConnection.userName}" password="${jdbcConnection.password}">
+            <property name="remarkable" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成 Model -->
+        <javaModelGenerator targetPackage="${javaModelGenerator.targetPackage}" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="${sqlMapGenerator.targetPackage}" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${javaClientGenerator.targetPackage}" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 生成表 -->
+        <!--        <table tableName="t_compare_define"-->
+        <!--               domainObjectName="CompareDefine" enableSelectByExample="true"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="define_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_compare_task"-->
+        <!--               domainObjectName="CompareTask" enableSelectByExample="true"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="task_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_compare_detail"-->
+        <!--               domainObjectName="CompareDetail" enableSelectByExample="true"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="detail_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_compare_schedule"-->
+        <!--               domainObjectName="CompareSchedule" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="schedule_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+
+        <!--        <table tableName="t_monitor_define"-->
+        <!--               domainObjectName="MonitorDefine" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="define_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_monitor_task"-->
+        <!--               domainObjectName="MonitorTask" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="task_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_monitor_schedule"-->
+        <!--               domainObjectName="MonitorSchedule" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="schedule_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_monitor_task_detail"-->
+        <!--               domainObjectName="MonitorTaskDetail" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="detail_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+
+
+        <!--        <table tableName="t_notify_contact"-->
+        <!--               domainObjectName="NotifyContact" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="contact_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="t_notify_group"-->
+        <!--               domainObjectName="NotifyGroup" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="group_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="tr_notify_define_group"-->
+        <!--               domainObjectName="NotifyDefineGroup" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="relate_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+        <!--        <table tableName="tr_notify_group_contact"-->
+        <!--               domainObjectName="NotifyGroupContact" enableSelectByExample="false"-->
+        <!--               enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+        <!--            <generatedKey column="relate_id" sqlStatement="MySql" identity="true"/>-->
+        <!--        </table>-->
+
+
+<!--        <table tableName="t_log_rule"-->
+<!--               domainObjectName="LogRule" enableSelectByExample="true"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="t_log_stat"
+               domainObjectName="LogStat" enableSelectByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+<!--        <table tableName="t_job_progress"-->
+<!--               domainObjectName="JobProgress" enableSelectByExample="false"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" selectByExampleQueryId="false">-->
+<!--        </table>-->
+
+    </context>
+</generatorConfiguration>

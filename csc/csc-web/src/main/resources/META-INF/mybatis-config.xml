@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25000"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+
+    <typeHandlers>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.MapTypeHandler" jdbcType="VARCHAR"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.basis.beacon.service.facade.enums.common.YesNoEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.CompareStatusEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.CompensateFlagEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.TaskStatusEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.TaskTypeEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.ScheduleStatusEnum"/>
+
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.MonitorTaskStatusEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.MonitorTypeEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.PriorityEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.SplitStrategyEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.AlarmLevelEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.NotifyTypeEnum"/>
+        <typeHandler handler="com.uaepay.mysql.starter.typehandler.EnumBaseHandler" jdbcType="VARCHAR"
+                     javaType="com.uaepay.pub.csc.service.facade.enums.DefineTypeEnum"/>
+
+
+    </typeHandlers>
+</configuration>

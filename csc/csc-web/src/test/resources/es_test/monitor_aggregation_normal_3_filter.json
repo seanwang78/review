@@ -1,0 +1,40 @@
+{
+  "index": "i_dev_csc_test_data",
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "match": {
+            "dataSet": "ut_agg_filter"
+          }
+        },
+        {
+          "range": {
+            "updateTime": {
+              "gte": {begin},
+              "lt": {end}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "dataType": {
+      "terms": {
+        "field": "dataType.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "success": {
+          "filter": {
+            "term": {
+              "status.keyword": "S"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

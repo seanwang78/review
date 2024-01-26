@@ -1,0 +1,1 @@
+[$!country][$!format.upper($!env)][$!define.monitorType] $!define.applicationName - $!define.defineName TaskId: $!task.taskId Count: $!task.detailCount#if($!task.isAllDetail == 'NO')+#end

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.logmonitor.JobProgressMapper">
+    <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.JobProgress">
+        <id column="job_code" jdbcType="VARCHAR" property="jobCode"/>
+        <result column="job_desc" jdbcType="VARCHAR" property="jobDesc"/>
+        <result column="check_minutes" jdbcType="INTEGER" property="checkMinutes"/>
+        <result column="delay_minutes" jdbcType="INTEGER" property="delayMinutes"/>
+        <result column="checked_time" jdbcType="TIMESTAMP" property="checkedTime"/>
+        <result column="next_trigger_time" jdbcType="TIMESTAMP" property="nextTriggerTime"/>
+        <result column="enable_flag" jdbcType="CHAR" property="enableFlag"/>
+        <result column="extension" jdbcType="VARCHAR" property="extension"/>
+        <result column="update_version" jdbcType="BIGINT" property="updateVersion"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        job_code, job_desc, check_minutes, delay_minutes, checked_time, next_trigger_time,
+        enable_flag, extension,update_version, memo, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_job_progress
+        where job_code = #{jobCode,jdbcType=VARCHAR}
+    </select>
+    <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.JobProgress">
+        insert into t_job_progress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobCode != null">
+                job_code,
+            </if>
+            <if test="jobDesc != null">
+                job_desc,
+            </if>
+            <if test="checkMinutes != null">
+                check_minutes,
+            </if>
+            <if test="delayMinutes != null">
+                delay_minutes,
+            </if>
+            <if test="checkedTime != null">
+                checked_time,
+            </if>
+            <if test="nextTriggerTime != null">
+                next_trigger_time,
+            </if>
+            <if test="enableFlag != null">
+                enable_flag,
+            </if>
+            <if test="extension != null">
+                extension,
+            </if>
+            <if test="updateVersion != null">
+                update_version,
+            </if>
+            <if test="memo != null">
+                memo,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobCode != null">
+                #{jobCode,jdbcType=VARCHAR},
+            </if>
+            <if test="jobDesc != null">
+                #{jobDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="checkMinutes != null">
+                #{checkMinutes,jdbcType=INTEGER},
+            </if>
+            <if test="delayMinutes != null">
+                #{delayMinutes,jdbcType=INTEGER},
+            </if>
+            <if test="checkedTime != null">
+                #{checkedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nextTriggerTime != null">
+                #{nextTriggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enableFlag != null">
+                #{enableFlag,jdbcType=CHAR},
+            </if>
+            <if test="extension != null">
+                #{extension,jdbcType=VARCHAR},
+            </if>
+            <if test="updateVersion != null">
+                #{updateVersion,jdbcType=BIGINT},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.JobProgress">
+        update t_job_progress
+        <set>
+            <if test="checkedTime != null">
+                checked_time = #{checkedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nextTriggerTime != null">
+                next_trigger_time = #{nextTriggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memo != null">
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            update_version = update_version + 1
+        </set>
+        where job_code = #{jobCode,jdbcType=VARCHAR} and update_version = #{updateVersion,jdbcType=BIGINT}
+    </update>
+    <update id="updateProgress"
+            parameterType="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.JobProgress">
+        update t_job_progress
+        set checked_time = #{checkedTime,jdbcType=TIMESTAMP},
+            next_trigger_time = #{nextTriggerTime,jdbcType=TIMESTAMP},
+            memo = null,
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            update_version = update_version + 1
+        where job_code = #{jobCode,jdbcType=VARCHAR} and update_version = #{updateVersion,jdbcType=BIGINT}
+    </update>
+    <select id="selectToExecute" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_job_progress
+        where next_trigger_time &lt;= #{beforeTime,jdbcType=TIMESTAMP} and enable_flag = 'Y'
+    </select>
+</mapper>

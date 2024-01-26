@@ -1,0 +1,67 @@
+{
+  "index": "i_dev_csc_test_data",
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "match": {
+            "dataSet": "ut_agg_script"
+          }
+        },
+        {
+          "range": {
+            "updateTime": {
+              "gte": {begin},
+              "lt": {end}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "dataType": {
+      "terms": {
+        "field": "dataType.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "success": {
+          "filter": {
+            "term": {
+              "status.keyword": "S"
+            }
+          }
+        },
+        "success_ratio": {
+          "bucket_script": {
+            "buckets_path": {
+              "success_total": "success._count",
+              "total": "_count"
+            },
+            "script": "params.success_total / params.total",
+            "format": "0.00%"
+          }
+        },
+        "success_ratio_filter": {
+          "bucket_selector": {
+            "buckets_path": {
+              "success_ratio": "success_ratio.value",
+              "total": "_count"
+            },
+            "script": "params.total >= 1 && params.success_ratio < 0.90"
+          }
+        },
+        "success_ratio_sort": {
+          "bucket_sort": {
+            "sort": [
+              { "success_ratio": { "order": "asc" } }
+            ],
+            "size": 50
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cscDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${datasource-unittest.csc.url}"/>
+        <property name="username" value="${datasource-unittest.csc.username}"/>
+        <property name="password" value="${datasource-unittest.csc.password}"/>
+    </bean>
+
+    <bean id="default" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${datasource-unittest.default.url}"/>
+        <property name="username" value="${datasource-unittest.default.username}"/>
+        <property name="password" value="${datasource-unittest.default.password}"/>
+    </bean>
+
+    <bean id="unittest_error_noauth" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${datasource-unittest.unittest_error_noauth.url}"/>
+        <property name="username" value="${datasource-unittest.unittest_error_noauth.username}"/>
+        <property name="password" value="${datasource-unittest.unittest_error_noauth.password}"/>
+    </bean>
+
+    <bean id="unittest_error_nodb" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${datasource-unittest.unittest_error_nodb.url}"/>
+        <property name="username" value="${datasource-unittest.unittest_error_nodb.username}"/>
+        <property name="password" value="${datasource-unittest.unittest_error_nodb.password}"/>
+    </bean>
+
+</beans>
