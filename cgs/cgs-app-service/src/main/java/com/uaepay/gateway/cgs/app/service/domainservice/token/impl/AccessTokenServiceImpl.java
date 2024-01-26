@@ -90,6 +90,8 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         String salt = Base64.toBase64String(SecureRandoms.getInstance().genBytes(16));
         redisTemplate.executePipelined(new SessionCallback<Void>() {
             @Override
+
+            //I am not sure this part code, pls review
             public <K, V> Void execute(RedisOperations<K, V> operations) throws DataAccessException {
                 K cacheKey = (K)buildSaltCacheKey(accessToken);
                 operations.opsForValue().set(cacheKey, (V)salt);
