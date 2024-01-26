@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.monitor.MonitorTaskDetailMapper">
+  <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTaskDetail">
+    <id column="detail_id" jdbcType="BIGINT" property="detailId" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="key_value" jdbcType="VARCHAR" property="keyValue" />
+    <result column="detail_content" jdbcType="VARCHAR" property="detailContent" />
+    <result column="extension" jdbcType="VARCHAR" property="extension" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    detail_id, task_id, key_value, detail_content, extension, memo, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_monitor_task_detail
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_monitor_task_detail
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTaskDetail">
+    <selectKey keyProperty="detailId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_monitor_task_detail (task_id, key_value, detail_content, 
+      extension, memo, create_time, 
+      update_time)
+    values (#{taskId,jdbcType=BIGINT}, #{keyValue,jdbcType=VARCHAR}, #{detailContent,jdbcType=VARCHAR}, 
+      #{extension,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTaskDetail">
+    <selectKey keyProperty="detailId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_monitor_task_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="keyValue != null">
+        key_value,
+      </if>
+      <if test="detailContent != null">
+        detail_content,
+      </if>
+      <if test="extension != null">
+        extension,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="keyValue != null">
+        #{keyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="detailContent != null">
+        #{detailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null">
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTaskDetail">
+    update t_monitor_task_detail
+    <set>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="keyValue != null">
+        key_value = #{keyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="detailContent != null">
+        detail_content = #{detailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null">
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTaskDetail">
+    update t_monitor_task_detail
+    set task_id = #{taskId,jdbcType=BIGINT},
+      key_value = #{keyValue,jdbcType=VARCHAR},
+      detail_content = #{detailContent,jdbcType=VARCHAR},
+      extension = #{extension,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </update>
+</mapper>

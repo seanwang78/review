@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.notify.NotifyGroupMapper">
+  <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyGroup">
+    <id column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="is_main" jdbcType="CHAR" property="isMain"/>
+    <result column="teams_url" jdbcType="VARCHAR" property="teamsUrl"/>
+    <result column="enable_flag" jdbcType="CHAR" property="enableFlag" />
+    <result column="extension" jdbcType="VARCHAR" property="extension" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    group_id, group_name, is_main, teams_url, enable_flag, extension, memo, create_time, update_time
+  </sql>
+
+
+  <select id="selectGroupByDefineId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from t_notify_group tng
+      where tng.enable_flag='Y' and tng.group_id in (
+      select distinct tndg.group_id from tr_notify_define_group tndg
+      where tndg.define_type= #{defineType,jdbcType=VARCHAR}
+      and tndg.define_id=#{defineId,jdbcType=BIGINT}
+      )
+      order by group_id
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_notify_group
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_notify_group
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyGroup">
+    <selectKey keyProperty="groupId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_notify_group (group_name, enable_flag, extension, 
+      memo, create_time, update_time
+      )
+    values (#{groupName,jdbcType=VARCHAR}, #{enableFlag,jdbcType=CHAR}, #{extension,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyGroup">
+    <selectKey keyProperty="groupId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_notify_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="teamsUrl != null">
+        teams_url,
+      </if>
+      <if test="enableFlag != null">
+        enable_flag,
+      </if>
+      <if test="extension != null">
+        extension,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamsUrl != null">
+        #{teamsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null">
+        #{enableFlag,jdbcType=CHAR},
+      </if>
+      <if test="extension != null">
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyGroup">
+    update t_notify_group
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null">
+        enable_flag = #{enableFlag,jdbcType=CHAR},
+      </if>
+      <if test="extension != null">
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyGroup">
+    update t_notify_group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      enable_flag = #{enableFlag,jdbcType=CHAR},
+      extension = #{extension,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </update>
+</mapper>

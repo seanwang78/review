@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.compare.CompareScheduleMapper">
+  <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareSchedule">
+    <id column="schedule_id" jdbcType="BIGINT" property="scheduleId" />
+    <result column="define_id" jdbcType="BIGINT" property="defineId" />
+    <result column="check_minutes" jdbcType="INTEGER" property="checkMinutes" />
+    <result column="delay_minutes" jdbcType="INTEGER" property="delayMinutes" />
+    <result column="checked_time" jdbcType="TIMESTAMP" property="checkedTime" />
+    <result column="next_trigger_time" jdbcType="TIMESTAMP" property="nextTriggerTime" />
+    <result column="current_task_id" jdbcType="BIGINT" property="currentTaskId" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="error_count" jdbcType="INTEGER" property="errorCount" />
+    <result column="schedule_status" jdbcType="CHAR" property="scheduleStatus" />
+    <result column="extension" jdbcType="VARCHAR" property="extension" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    schedule_id, define_id, check_minutes, delay_minutes, checked_time, next_trigger_time, 
+    current_task_id, version, error_count, schedule_status, extension, memo, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_compare_schedule
+    where schedule_id = #{scheduleId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareSchedule">
+    <selectKey keyProperty="scheduleId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_compare_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="defineId != null">
+        define_id,
+      </if>
+      <if test="checkMinutes != null">
+        check_minutes,
+      </if>
+      <if test="delayMinutes != null">
+        delay_minutes,
+      </if>
+      <if test="checkedTime != null">
+        checked_time,
+      </if>
+      <if test="nextTriggerTime != null">
+        next_trigger_time,
+      </if>
+      <if test="currentTaskId != null">
+        current_task_id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="errorCount != null">
+        error_count,
+      </if>
+      <if test="scheduleStatus != null">
+        schedule_status,
+      </if>
+      <if test="extension != null">
+        extension,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="defineId != null">
+        #{defineId,jdbcType=BIGINT},
+      </if>
+      <if test="checkMinutes != null">
+        #{checkMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="delayMinutes != null">
+        #{delayMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="checkedTime != null">
+        #{checkedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextTriggerTime != null">
+        #{nextTriggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentTaskId != null">
+        #{currentTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="errorCount != null">
+        #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleStatus != null">
+        #{scheduleStatus,jdbcType=CHAR},
+      </if>
+      <if test="extension != null">
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareSchedule">
+    update t_compare_schedule
+    <set>
+      <if test="defineId != null">
+        define_id = #{defineId,jdbcType=BIGINT},
+      </if>
+      <if test="checkMinutes != null">
+        check_minutes = #{checkMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="delayMinutes != null">
+        delay_minutes = #{delayMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="checkedTime != null">
+        checked_time = #{checkedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextTriggerTime != null">
+        next_trigger_time = #{nextTriggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentTaskId != null">
+        current_task_id = #{currentTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="errorCount != null">
+        error_count = #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleStatus != null">
+        schedule_status = #{scheduleStatus,jdbcType=CHAR},
+      </if>
+      <if test="extension != null">
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where schedule_id = #{scheduleId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectToExecute" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_compare_schedule
+    where next_trigger_time &gt;= now() - interval #{beforeMinutes} minute and next_trigger_time &lt;= now()
+      and schedule_status = 'Y' and schedule_id % #{shardingCount} = #{shardingIndex}
+    order by next_trigger_time
+    limit #{batchSize}
+  </select>
+
+  <update id="updateTaskApplied">
+    update t_compare_schedule
+    set version = version + 1
+      , current_task_id = #{taskId,jdbcType=BIGINT}
+      , next_trigger_time = #{nextTriggerTime,jdbcType=TIMESTAMP}
+    where schedule_id = #{scheduleId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT} and current_task_id is null
+  </update>
+
+  <update id="updateTaskErrorDelay">
+    update t_compare_schedule
+    set version = version + 1
+      , error_count = #{errorCount,jdbcType=INTEGER}
+      , next_trigger_time = #{nextTriggerTime,jdbcType=TIMESTAMP}
+    where schedule_id = #{scheduleId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT}
+  </update>
+  <update id="updateTaskErrorReset">
+    update t_compare_schedule
+    set version = version + 1
+      , error_count = #{errorCount,jdbcType=INTEGER}
+      , current_task_id = null
+    where schedule_id = #{scheduleId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT} and current_task_id is not null
+  </update>
+  <update id="updateErrorStatus">
+    update t_compare_schedule
+    set version = version + 1
+      , error_count = #{errorCount,jdbcType=INTEGER}
+      , schedule_status = #{scheduleStatus,jdbcType=CHAR}
+    where schedule_id = #{scheduleId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateTaskNormal">
+    update t_compare_schedule
+    set version = version + 1
+      , current_task_id = null
+      , error_count = #{errorCount,jdbcType=INTEGER}
+      , checked_time = #{checkedTime,jdbcType=TIMESTAMP}
+      , next_trigger_time = #{nextTriggerTime,jdbcType=TIMESTAMP}
+    where schedule_id = #{scheduleId,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT} and current_task_id is not null
+  </update>
+</mapper>

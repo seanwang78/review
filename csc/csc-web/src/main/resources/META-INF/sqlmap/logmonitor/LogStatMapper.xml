@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.logmonitor.LogStatMapper">
+    <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.LogStat">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="app_code" jdbcType="VARCHAR" property="appCode"/>
+        <result column="api_code" jdbcType="VARCHAR" property="apiCode"/>
+        <result column="return_code" jdbcType="VARCHAR" property="returnCode"/>
+        <result column="return_msg" jdbcType="VARCHAR" property="returnMsg"/>
+        <result column="value_count" jdbcType="INTEGER" property="valueCount"/>
+        <result column="latest_tid" jdbcType="VARCHAR" property="latestTid"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, begin_time, end_time, app_code, api_code, return_code, return_msg, value_count, latest_tid,
+        status,update_by, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_log_stat
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.LogStat">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_log_stat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="appCode != null">
+                app_code,
+            </if>
+            <if test="apiCode != null">
+                api_code,
+            </if>
+            <if test="returnCode != null">
+                return_code,
+            </if>
+            <if test="returnMsg != null">
+                return_msg,
+            </if>
+            <if test="valueCount != null">
+                value_count,
+            </if>
+            <if test="latestTid != null">
+                latest_tid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appCode != null">
+                #{appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="apiCode != null">
+                #{apiCode,jdbcType=VARCHAR},
+            </if>
+            <if test="returnCode != null">
+                #{returnCode,jdbcType=VARCHAR},
+            </if>
+            <if test="returnMsg != null">
+                #{returnMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="valueCount != null">
+                #{valueCount,jdbcType=INTEGER},
+            </if>
+            <if test="latestTid != null">
+                #{latestTid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.logmonitor.LogStat">
+        update t_log_stat
+        <set>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appCode != null">
+                app_code = #{appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="apiCode != null">
+                api_code = #{apiCode,jdbcType=VARCHAR},
+            </if>
+            <if test="returnCode != null">
+                return_code = #{returnCode,jdbcType=VARCHAR},
+            </if>
+            <if test="returnMsg != null">
+                return_msg = #{returnMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="valueCount != null">
+                value_count = #{valueCount,jdbcType=INTEGER},
+            </if>
+            <if test="latestTid != null">
+                latest_tid = #{latestTid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectToRetry" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_log_stat
+        where status = 'I' and begin_time between #{beginTime,jdbcType=TIMESTAMP} and #{endTime,jdbcType=TIMESTAMP}
+        and id &gt; #{id,jdbcType=BIGINT} order by id limit #{pageSize}
+    </select>
+    <update id="updateStatus">
+        update t_log_stat
+        set status = #{status,jdbcType=VARCHAR},
+        update_by = #{operator,jdbcType=VARCHAR},
+        update_time = now()
+        where status = 'I' and id in
+        <foreach item="item" index="index" collection="idList" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

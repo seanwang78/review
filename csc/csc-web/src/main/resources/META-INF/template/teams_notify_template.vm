@@ -1,0 +1,7 @@
+{
+"@context": "https://schema.org/extensions",
+"@type": "MessageCard",
+"themeColor": "DC143C",
+"title": "$!title",
+"text": "$!text"
+}

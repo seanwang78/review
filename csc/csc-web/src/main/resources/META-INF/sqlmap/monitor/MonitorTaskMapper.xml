@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.monitor.MonitorTaskMapper">
+  <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    <id column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="define_id" jdbcType="BIGINT" property="defineId" />
+    <result column="monitor_type" jdbcType="CHAR" property="monitorType" />
+    <result column="task_type" jdbcType="CHAR" property="taskType" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="orig_task_id" jdbcType="BIGINT" property="origTaskId" />
+    <result column="data_begin_time" jdbcType="TIMESTAMP" property="dataBeginTime" />
+    <result column="data_end_time" jdbcType="TIMESTAMP" property="dataEndTime" />
+    <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
+    <result column="detail_count" jdbcType="INTEGER" property="detailCount" />
+    <result column="is_all_detail" jdbcType="CHAR" property="isAllDetail" />
+    <result column="alarm_level" jdbcType="CHAR" property="alarmLevel" />
+    <result column="error_code" jdbcType="VARCHAR" property="errorCode" />
+    <result column="error_message" jdbcType="VARCHAR" property="errorMessage" />
+    <result column="last_retry_task_id" jdbcType="BIGINT" property="lastRetryTaskId" />
+    <result column="execute_consume" jdbcType="INTEGER" property="executeConsume" />
+    <result column="extension" jdbcType="VARCHAR" property="extension" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, define_id, monitor_type, task_type, operator, orig_task_id, data_begin_time, 
+    data_end_time, task_status, detail_count, is_all_detail, alarm_level, error_code, 
+    error_message, last_retry_task_id, execute_consume, extension, memo, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_monitor_task
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_monitor_task
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    <selectKey keyProperty="taskId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_monitor_task (define_id, monitor_type, task_type, 
+      operator, orig_task_id, data_begin_time, 
+      data_end_time, task_status, detail_count, 
+      is_all_detail, alarm_level, error_code, 
+      error_message, last_retry_task_id, execute_consume, 
+      extension, memo, create_time, 
+      update_time)
+    values (#{defineId,jdbcType=BIGINT}, #{monitorType,jdbcType=CHAR}, #{taskType,jdbcType=CHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{origTaskId,jdbcType=BIGINT}, #{dataBeginTime,jdbcType=TIMESTAMP}, 
+      #{dataEndTime,jdbcType=TIMESTAMP}, #{taskStatus,jdbcType=VARCHAR}, #{detailCount,jdbcType=INTEGER}, 
+      #{isAllDetail,jdbcType=CHAR}, #{alarmLevel,jdbcType=CHAR}, #{errorCode,jdbcType=VARCHAR}, 
+      #{errorMessage,jdbcType=VARCHAR}, #{lastRetryTaskId,jdbcType=BIGINT}, #{executeConsume,jdbcType=INTEGER}, 
+      #{extension,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    insert into t_monitor_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="defineId != null">
+        define_id,
+      </if>
+      <if test="monitorType != null">
+        monitor_type,
+      </if>
+      <if test="taskType != null">
+        task_type,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="origTaskId != null">
+        orig_task_id,
+      </if>
+      <if test="dataBeginTime != null">
+        data_begin_time,
+      </if>
+      <if test="dataEndTime != null">
+        data_end_time,
+      </if>
+      <if test="taskStatus != null">
+        task_status,
+      </if>
+      <if test="detailCount != null">
+        detail_count,
+      </if>
+      <if test="isAllDetail != null">
+        is_all_detail,
+      </if>
+      <if test="alarmLevel != null">
+        alarm_level,
+      </if>
+      <if test="errorCode != null">
+        error_code,
+      </if>
+      <if test="errorMessage != null">
+        error_message,
+      </if>
+      <if test="lastRetryTaskId != null">
+        last_retry_task_id,
+      </if>
+      <if test="executeConsume != null">
+        execute_consume,
+      </if>
+      <if test="extension != null">
+        extension,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="defineId != null">
+        #{defineId,jdbcType=BIGINT},
+      </if>
+      <if test="monitorType != null">
+        #{monitorType,jdbcType=CHAR},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="origTaskId != null">
+        #{origTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="dataBeginTime != null">
+        #{dataBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataEndTime != null">
+        #{dataEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="detailCount != null">
+        #{detailCount,jdbcType=INTEGER},
+      </if>
+      <if test="isAllDetail != null">
+        #{isAllDetail,jdbcType=CHAR},
+      </if>
+      <if test="alarmLevel != null">
+        #{alarmLevel,jdbcType=CHAR},
+      </if>
+      <if test="errorCode != null">
+        #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="lastRetryTaskId != null">
+        #{lastRetryTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="executeConsume != null">
+        #{executeConsume,jdbcType=INTEGER},
+      </if>
+      <if test="extension != null">
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    <set>
+      <if test="defineId != null">
+        define_id = #{defineId,jdbcType=BIGINT},
+      </if>
+      <if test="monitorType != null">
+        monitor_type = #{monitorType,jdbcType=CHAR},
+      </if>
+      <if test="taskType != null">
+        task_type = #{taskType,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="origTaskId != null">
+        orig_task_id = #{origTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="dataBeginTime != null">
+        data_begin_time = #{dataBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataEndTime != null">
+        data_end_time = #{dataEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskStatus != null">
+        task_status = #{taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="detailCount != null">
+        detail_count = #{detailCount,jdbcType=INTEGER},
+      </if>
+      <if test="isAllDetail != null">
+        is_all_detail = #{isAllDetail,jdbcType=CHAR},
+      </if>
+      <if test="alarmLevel != null">
+        alarm_level = #{alarmLevel,jdbcType=CHAR},
+      </if>
+      <if test="errorCode != null">
+        error_code = #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        error_message = #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="lastRetryTaskId != null">
+        last_retry_task_id = #{lastRetryTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="executeConsume != null">
+        execute_consume = #{executeConsume,jdbcType=INTEGER},
+      </if>
+      <if test="extension != null">
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    set define_id = #{defineId,jdbcType=BIGINT},
+      monitor_type = #{monitorType,jdbcType=CHAR},
+      task_type = #{taskType,jdbcType=CHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      orig_task_id = #{origTaskId,jdbcType=BIGINT},
+      data_begin_time = #{dataBeginTime,jdbcType=TIMESTAMP},
+      data_end_time = #{dataEndTime,jdbcType=TIMESTAMP},
+      task_status = #{taskStatus,jdbcType=VARCHAR},
+      detail_count = #{detailCount,jdbcType=INTEGER},
+      is_all_detail = #{isAllDetail,jdbcType=CHAR},
+      alarm_level = #{alarmLevel,jdbcType=CHAR},
+      error_code = #{errorCode,jdbcType=VARCHAR},
+      error_message = #{errorMessage,jdbcType=VARCHAR},
+      last_retry_task_id = #{lastRetryTaskId,jdbcType=BIGINT},
+      execute_consume = #{executeConsume,jdbcType=INTEGER},
+      extension = #{extension,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="updateSuccess" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    <set>
+      task_status = #{newStatus,jdbcType=VARCHAR},
+      detail_count = #{task.detailCount,jdbcType=INTEGER},
+      is_all_detail = #{task.isAllDetail,jdbcType=CHAR},
+      <if test="task.alarmLevel != null">
+        alarm_level = #{task.alarmLevel,jdbcType=CHAR},
+      </if>
+      <if test="task.executeConsume != null">
+        execute_consume = #{task.executeConsume,jdbcType=INTEGER},
+      </if>
+    </set>
+    where task_id = #{task.taskId,jdbcType=BIGINT} and task_status = #{task.taskStatus,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateError" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    <set>
+      task_status = #{newStatus,jdbcType=VARCHAR},
+      <if test="task.errorCode != null">
+        error_code = #{task.errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="task.errorMessage != null">
+        error_message = #{task.errorMessage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where task_id = #{task.taskId,jdbcType=BIGINT} and task_status = #{task.taskStatus,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateFail" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    <set>
+      task_status = #{newStatus,jdbcType=VARCHAR},
+      detail_count = #{task.detailCount,jdbcType=INTEGER},
+      is_all_detail = #{task.isAllDetail,jdbcType=CHAR},
+      <if test="task.alarmLevel != null">
+        alarm_level = #{task.alarmLevel,jdbcType=CHAR},
+      </if>
+      <if test="task.executeConsume != null">
+        execute_consume = #{task.executeConsume,jdbcType=INTEGER},
+      </if>
+    </set>
+    where task_id = #{task.taskId,jdbcType=BIGINT} and task_status = #{task.taskStatus,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateLastRetryTask">
+    update t_monitor_task
+    set last_retry_task_id = #{retryTaskId,jdbcType=BIGINT}
+    where task_id = #{origTaskId,jdbcType=BIGINT} and task_status not in ('S', 'RS')
+  </update>
+
+  <update id="updateRetrySuccess" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    <set>
+      task_status = #{newStatus,jdbcType=VARCHAR}
+    </set>
+    where task_id = #{task.taskId,jdbcType=BIGINT} and task_status = #{task.taskStatus,jdbcType=VARCHAR}
+    and last_retry_task_id = #{task.lastRetryTaskId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateManualConfirmed" parameterType="com.uaepay.pub.csc.core.dal.dataobject.monitor.MonitorTask">
+    update t_monitor_task
+    <set>
+      task_status = #{newStatus,jdbcType=VARCHAR},
+      error_message = #{task.errorMessage,jdbcType=VARCHAR},
+    </set>
+    where task_id = #{task.taskId,jdbcType=BIGINT} and task_status = #{task.taskStatus,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateManualConfirmedBatch">
+    update t_monitor_task
+    <set>
+      task_status = 'MC',
+      error_message = #{errorMessage,jdbcType=VARCHAR},
+    </set>
+    where task_status in ('F', 'E') and task_id in
+    <foreach item="item" index="index" collection="taskIds" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
+
+</mapper>

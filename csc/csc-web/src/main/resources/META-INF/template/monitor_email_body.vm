@@ -1,0 +1,77 @@
+<style type='text/css'>
+    table.gridtable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+    }
+
+    table.gridtable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+    }
+
+    table.gridtable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+    }
+</style>
+
+<table class='gridtable' border='1'>
+    <tr>
+        <th style='text-align:center;' bgcolor='#dedede'>Task Id</th>
+        <th style='text-align:center;' bgcolor='#dedede'>Define Id</th>
+        <th style='text-align:center;' bgcolor='#dedede'>Time Range</th>
+        <th style='text-align:center;' bgcolor='#dedede'>Status</th>
+        <th style='text-align:center;' bgcolor='#dedede'>Count</th>
+        #if($!task.monitorType == "ALARM")
+            <th style='text-align:center;' bgcolor='#dedede'>Alarm level</th>
+        #end
+        <th style='text-align:center;' bgcolor='#dedede'>Type</th>
+        <th style='text-align:center;' bgcolor='#dedede'>Operator</th>
+    </tr>
+    <tr>
+        <td style='text-align:center;'><u><a href=$!monitorTaskUrl>$!task.taskId</a></u></td>
+        <td style='text-align:center;'><u><a href=$!monitorDefineUrl>$!task.defineId</a></u></td>
+        <td style='text-align:center;'>$!format.datetime($!task.dataBeginTime)
+            - $!format.datetime($!task.dataEndTime)</td>
+        <td style='text-align:center;'>$!task.taskStatus</td>
+        <td style='text-align:center;'>$!task.detailCount#if($!task.isAllDetail == 'NO')+#end</td>
+        #if($!task.monitorType == "ALARM")
+            <td style='text-align:center;'>$!task.alarmLevel</td>
+        #end
+        <td style='text-align:center;'>$!task.taskType</td>
+        <td style='text-align:center;'>$!task.operator</td>
+    </tr>
+</table>
+<br/>
+<table class='gridtable' border='1'>
+    #if ($columns && $columns.size() > 0)
+        <tr>
+            #foreach($column in $columns)
+                <th style='text-align:center;' bgcolor='#dedede'>$!column.name</th>
+            #end
+        </tr>
+    #end
+    #if ($details && $details.size() > 0)
+        #foreach($detail in $details)
+            <tr>
+                #foreach($data in $detail.row)
+                    #if($data)
+                        <td style='text-align:center;'>$!format.formatObject($!data)</td>
+                    #else
+                        <td style='text-align:center;'>$!data</td>
+                    #end
+                #end
+            </tr>
+        #end
+    #end
+</table>

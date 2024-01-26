@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.notify.NotifyDefineGroupMapper">
+  <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyDefineGroup">
+    <id column="relate_id" jdbcType="BIGINT" property="relateId" />
+    <result column="define_type" jdbcType="VARCHAR" property="defineType" />
+    <result column="define_id" jdbcType="BIGINT" property="defineId" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    relate_id, define_type, define_id, group_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tr_notify_define_group
+    where relate_id = #{relateId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tr_notify_define_group
+    where relate_id = #{relateId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyDefineGroup">
+    <selectKey keyProperty="relateId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tr_notify_define_group (define_type, define_id, group_id, 
+      create_time)
+    values (#{defineType,jdbcType=VARCHAR}, #{defineId,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyDefineGroup">
+    <selectKey keyProperty="relateId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tr_notify_define_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="defineType != null">
+        define_type,
+      </if>
+      <if test="defineId != null">
+        define_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="defineType != null">
+        #{defineType,jdbcType=VARCHAR},
+      </if>
+      <if test="defineId != null">
+        #{defineId,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyDefineGroup">
+    update tr_notify_define_group
+    <set>
+      <if test="defineType != null">
+        define_type = #{defineType,jdbcType=VARCHAR},
+      </if>
+      <if test="defineId != null">
+        define_id = #{defineId,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where relate_id = #{relateId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uaepay.pub.csc.core.dal.dataobject.notify.NotifyDefineGroup">
+    update tr_notify_define_group
+    set define_type = #{defineType,jdbcType=VARCHAR},
+      define_id = #{defineId,jdbcType=BIGINT},
+      group_id = #{groupId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where relate_id = #{relateId,jdbcType=BIGINT}
+  </update>
+</mapper>

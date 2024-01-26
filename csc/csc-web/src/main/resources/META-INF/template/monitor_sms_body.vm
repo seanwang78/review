@@ -1,0 +1,5 @@
+[$!country][$!format.upper($!env)][$!define.monitorType] $!define.applicationName - $!define.defineName TaskId: $!task.taskId Count: $!task.detailCount#if($!task.isAllDetail == 'NO')+#end
+ Time: $!format.datetime($!task.dataBeginTime) $!format.duration($!task.dataBeginTime, $!task.dataEndTime)
+#foreach($detail in $!details)
+    $!detail.row
+#end

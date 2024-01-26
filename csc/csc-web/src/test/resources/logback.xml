@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="uaepay-logback-console.xml"/>
+
+<!--    <logger name="com.uaepay.pub.csc.core.dal.mapper.monitor.MonitorTaskMapper" level="debug"/>-->
+
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="debug"/>
+</configuration>

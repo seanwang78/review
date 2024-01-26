@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uaepay.pub.csc.core.dal.mapper.compare.CompareDetailMapper">
+  <resultMap id="BaseResultMap" type="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareDetail">
+    <id column="detail_id" jdbcType="BIGINT" property="detailId" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="relate_identity" jdbcType="VARCHAR" property="relateIdentity" />
+    <result column="src_data" jdbcType="VARCHAR" property="srcData" />
+    <result column="target_data" jdbcType="VARCHAR" property="targetData" />
+    <result column="compare_status" jdbcType="CHAR" property="compareStatus" />
+    <result column="compensate_flag" jdbcType="CHAR" property="compensateFlag" />
+    <result column="error_message" jdbcType="VARCHAR" property="errorMessage" />
+    <result column="extension" jdbcType="VARCHAR" property="extension" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    detail_id, task_id, relate_identity, src_data, target_data, compare_status, compensate_flag, 
+    error_message, extension, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_compare_detail
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_compare_detail
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareDetail">
+    <selectKey keyProperty="detailId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_compare_detail (task_id, relate_identity, src_data, 
+      target_data, compare_status, compensate_flag, 
+      error_message, extension, create_time
+      )
+    values (#{taskId,jdbcType=BIGINT}, #{relateIdentity,jdbcType=VARCHAR}, #{srcData,jdbcType=VARCHAR}, 
+      #{targetData,jdbcType=VARCHAR}, #{compareStatus,jdbcType=CHAR}, #{compensateFlag,jdbcType=CHAR}, 
+      #{errorMessage,jdbcType=VARCHAR}, #{extension,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareDetail">
+    <selectKey keyProperty="detailId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_compare_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="relateIdentity != null">
+        relate_identity,
+      </if>
+      <if test="srcData != null">
+        src_data,
+      </if>
+      <if test="targetData != null">
+        target_data,
+      </if>
+      <if test="compareStatus != null">
+        compare_status,
+      </if>
+      <if test="compensateFlag != null">
+        compensate_flag,
+      </if>
+      <if test="errorMessage != null">
+        error_message,
+      </if>
+      <if test="extension != null">
+        extension,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="relateIdentity != null">
+        #{relateIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="srcData != null">
+        #{srcData,jdbcType=VARCHAR},
+      </if>
+      <if test="targetData != null">
+        #{targetData,jdbcType=VARCHAR},
+      </if>
+      <if test="compareStatus != null">
+        #{compareStatus,jdbcType=CHAR},
+      </if>
+      <if test="compensateFlag != null">
+        #{compensateFlag,jdbcType=CHAR},
+      </if>
+      <if test="errorMessage != null">
+        #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null">
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareDetail">
+    update t_compare_detail
+    <set>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="relateIdentity != null">
+        relate_identity = #{relateIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="srcData != null">
+        src_data = #{srcData,jdbcType=VARCHAR},
+      </if>
+      <if test="targetData != null">
+        target_data = #{targetData,jdbcType=VARCHAR},
+      </if>
+      <if test="compareStatus != null">
+        compare_status = #{compareStatus,jdbcType=CHAR},
+      </if>
+      <if test="compensateFlag != null">
+        compensate_flag = #{compensateFlag,jdbcType=CHAR},
+      </if>
+      <if test="errorMessage != null">
+        error_message = #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null">
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uaepay.pub.csc.core.dal.dataobject.compare.CompareDetail">
+    update t_compare_detail
+    set task_id = #{taskId,jdbcType=BIGINT},
+      relate_identity = #{relateIdentity,jdbcType=VARCHAR},
+      src_data = #{srcData,jdbcType=VARCHAR},
+      target_data = #{targetData,jdbcType=VARCHAR},
+      compare_status = #{compareStatus,jdbcType=CHAR},
+      compensate_flag = #{compensateFlag,jdbcType=CHAR},
+      error_message = #{errorMessage,jdbcType=VARCHAR},
+      extension = #{extension,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where detail_id = #{detailId,jdbcType=BIGINT}
+  </update>
+
+  <select id="listWaitCompensateDetails" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_compare_detail
+    where task_id = #{taskId,jdbcType=BIGINT} and compensate_flag in ('W', 'E')
+    order by compensate_flag desc, update_time, detail_id
+  </select>
+
+  <update id="updateDetailCompensate">
+    update t_compare_detail
+    set compensate_flag = #{newStatus,jdbcType=CHAR}
+    where detail_id = #{detailId,jdbcType=BIGINT} and compensate_flag = #{oldStatus,jdbcType=CHAR}
+  </update>
+
+</mapper>
