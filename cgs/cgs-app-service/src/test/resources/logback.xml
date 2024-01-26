@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOGGER_PREFIX" value="com.uaepay.gateway.cgs.app.service"/>
+    <property name="LOG_FILE_PATH" value="/opt/logs/cgs-app"/>
+    <property name="LOG_FILE_MAX_SIZE" value="1024MB"/>
+    <property name="LOG_FILE_MAX_HISTORY" value="0"/>
+
+    <include resource="uaepay-logback-defaults.xml"/>
+    <include resource="uaepay-logback-facade.xml"/>
+    <include resource="uaepay-logback-daemon.xml"/>
+    <include resource="uaepay-logback-service.xml"/>
+    <include resource="uaepay-logback-integration.xml"/>
+    <include resource="uaepay-logback-dal.xml"/>
+
+</configuration>

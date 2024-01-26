@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <include resource="gateway-common-app-template-logback-logger.xml"/>
+
+    <logger name="com.uaepay.gateway.cgs.app.template.ext.service" additivity="false">
+        <appender-ref ref="FACADE-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="com.uaepay.gateway.cgs.app.template.domainservice" additivity="false">
+        <appender-ref ref="SERVICE-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="com.uaepay.gateway.cgs.app.template.integration" additivity="false">
+        <appender-ref ref="INTEGRATION-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+</included>

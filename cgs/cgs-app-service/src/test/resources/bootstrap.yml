@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: cgs-app
+
+server:
+  port: 8081
+
+dubbo:
+  application:
+    owner: ${spring.application.name}
+    name: ${spring.application.name}
+    organization: uaepay
+    logger: slf4j
+  registry:
+    address: zookeeper://10.90.11.101:32181
+    register: true
+    check: false
+    timeout: 15000
+    file: /opt/dubbo/dubbo-registry/${dubbo.application.name}.cache
+  protocol:
+    name: dubbo
+    buffer: 102400
+    port: 20001
+  provider:
+    retries: 0
+  metadata-report:
+    address: ${dubbo.registry.address}
+    timeout: 15000
+    retry-times: 3
+  scan:
+    base-packages: com.uaepay.gateway.cgs.app.template.ext.service
+
